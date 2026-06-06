@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Speedfly Bounce Bingo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    background:#000814;
+    font-family:'Press Start 2P', monospace;
+    margin:0;
+    color:#00ff00;
+}
+
+.container{
+    max-width:900px;
+    margin:40px auto;
+    background:black;
+    border:5px solid #00ff00;
+    border-radius:20px;
+    padding:40px;
+
+    box-shadow:
+    0 0 15px #00ff00,
+    0 0 40px #00ff00;
+}
+
+h1{
+    color:#ffd700;
+    text-align:center;
+    font-size:42px;
+}
+
+label{
+    display:block;
+    margin-top:25px;
+    margin-bottom:10px;
+}
+
+input,select{
+    width:100%;
+    padding:16px;
+    background:black;
+    color:#00ff00;
+    border:3px solid #00ff00;
+    font-family:'Press Start 2P', monospace;
+}
+
+button{
+    display:block;
+    margin:40px auto;
+    padding:20px 40px;
+    background:red;
+    color:white;
+    border:3px solid white;
+    font-family:'Press Start 2P', monospace;
+    cursor:pointer;
+}
+
+.leaderboard{
+    margin-top:50px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    border-bottom:1px dotted #00ff00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Speedfly Bounce Bingo</h1>
+
+<label>Name</label>
+<input placeholder="Enter name">
+
+<label>Reason</label>
+<select>
+<option>Risk Awareness</option>
+<option>Training Concerns</option>
+<option>Decision Making</option>
+</select>
+
+<button>SUBMIT</button>
+
+<div class="leaderboard">
+
+<h2>Leaderboard</h2>
+
+<div class="row">
+<span>#1 Example User</span>
+<span>120</span>
+</div>
+
+<div class="row">
+<span>#2 Example User</span>
+<span>95</span>
+</div>
+
+<div class="row">
+<span>#3 Example User</span>
+<span>80</span>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

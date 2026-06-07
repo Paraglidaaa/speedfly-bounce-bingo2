@@ -156,7 +156,7 @@ SUBMIT
       &times;
     </span>
 
-    <h2 id="modalAlias"></h2>
+    <h2 id="modalName"></h2>
 
     <p id="modalComment"></p>
 
@@ -199,7 +199,7 @@ window.submitEntry = async function(){
   const comment =
     document.getElementById("comment").value;
 
-  if(!alias) return;
+  if(!name) return;
 
   await addDoc(
     collection(db,"submissions"),

@@ -120,17 +120,17 @@ textarea{
 
 <h1>Speedfly Bounce Bingo</h1>
 
-<label>Name</label>
-<input id="name" type="text" placeholder="Enter name">
+<label>Name</label> <input id="name" type="text" placeholder="Enter name">
 
 <label>Comments (Optional)</label>
+
 <textarea
 id="comment"
 placeholder="Why are you concerned?"
 rows="5"></textarea>
 
-<label>Reason</label>
-<select>
+<label>Reason</label> <select>
+
 <option>Risk Analysis</option>
 <option>Training Concerns</option>
 <option>Decision Making</option>
@@ -155,19 +155,20 @@ SUBMIT
 
   <div class="modal-content">
 
-    <span class="close" onclick="closeModal()">
-      &times;
-    </span>
+```
+<span class="close" onclick="closeModal()">
+  &times;
+</span>
 
-    <h2 id="modalName"></h2>
+<h2 id="modalName"></h2>
 
-    <p id="modalComment"></p>
+<p id="modalComment"></p>
+```
 
   </div>
 
 </div>
 
-<script type="module">
 ...
 </script>
 
@@ -282,13 +283,6 @@ window.closeModal = function(){
 
 loadLeaderboard();
 
-</script>
-
-  <script>
-function submitEntry() {
-    alert("submitEntry was called");
-}   
-</script>
   
 </body>
 </html>

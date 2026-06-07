@@ -193,8 +193,8 @@ const db = getFirestore(app);
 
 window.submitEntry = async function(){
 
-  const alias =
-    document.getElementById("alias").value;
+  const name =
+    document.getElementById("name").value;
 
   const comment =
     document.getElementById("comment").value;
@@ -204,13 +204,13 @@ window.submitEntry = async function(){
   await addDoc(
     collection(db,"submissions"),
     {
-      alias,
+      name,
       comment,
       created: Date.now()
     }
   );
 
-  document.getElementById("alias").value="";
+  document.getElementById("name").value="";
   document.getElementById("comment").value="";
 
   loadLeaderboard();
@@ -240,13 +240,13 @@ window.loadLeaderboard = async function(){
     row.className="row";
 
     row.innerHTML =
-      `<span>${data.alias}</span>`;
+      `<span>${data.name}</span>`;
 
     row.onclick = ()=>{
 
       document.getElementById(
-        "modalAlias"
-      ).innerText = data.alias;
+        "modalName"
+      ).innerText = data.name;
 
       document.getElementById(
         "modalComment"

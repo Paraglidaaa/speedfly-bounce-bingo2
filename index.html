@@ -32,6 +32,12 @@
   color:#00ff00;
 }
 
+.close{
+  float:right;
+  cursor:pointer;
+  font-size:30px;
+}
+
 body{
     background:#000814;
     font-family:'Press Start 2P', monospace;
@@ -93,6 +99,14 @@ button{
     justify-content:space-between;
     padding:10px;
     border-bottom:1px dotted #00ff00;
+    cursor:pointer;
+}
+
+.reason-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px dotted #00ff00;
 }
 
 </style>
@@ -101,9 +115,7 @@ button{
 <body>
 
 <div id="welcomeModal" class="modal" style="display:block;">
-
   <div class="modal-content">
-
     <h2>Welcome to Speedfly Bounce Bingo</h2>
 
     <p>
@@ -117,9 +129,7 @@ button{
     <button onclick="closeWelcomeModal()">
       ENTER RESPECTFULLY
     </button>
-
   </div>
-
 </div>
 
 <div class="container">
@@ -141,13 +151,24 @@ SUBMIT
 </button>
 
 <div class="leaderboard">
-
-<h2>Leaderboard</h2>
-
-<div id="leaderboard"></div>
+  <h2>Leaderboard</h2>
+  <div id="leaderboard"></div>
+</div>
 
 </div>
 
+<div id="reasonModal" class="modal">
+  <div class="modal-content">
+
+    <span class="close" onclick="closeReasonModal()">
+      &times;
+    </span>
+
+    <h2 id="modalName"></h2>
+
+    <div id="reasonBreakdown"></div>
+
+  </div>
 </div>
 
 <script type="module">
@@ -175,6 +196,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+const reasonLabels = {
+  "incompetence": "Incompetence",
+  "complacency": "Complacency",
+  "pushing too hard": "Pushing too hard"
+};
 
 window.submitEntry = async function(){
 
@@ -220,17 +247,26 @@ window.loadLeaderboard = async function(){
   snap.forEach(doc=>{
 
     const data = doc.data();
-
     const name = data.name.trim();
+    const reason = data.reason;
 
     if(!counts[name]){
       counts[name] = {
         name,
-        count:0
+        count:0,
+        reasons:{
+          "incompetence":0,
+          "complacency":0,
+          "pushing too hard":0
+        }
       };
     }
 
     counts[name].count++;
+
+    if(counts[name].reasons[reason] !== undefined){
+      counts[name].reasons[reason]++;
+    }
 
   });
 
@@ -247,17 +283,50 @@ window.loadLeaderboard = async function(){
         `<span>${person.name}</span>
          <span>${person.count}</span>`;
 
+      row.onclick = ()=>{
+
+        document.getElementById("modalName").innerText =
+          `${person.name} (${person.count} votes)`;
+
+        const breakdown =
+          document.getElementById("reasonBreakdown");
+
+        breakdown.innerHTML = "";
+
+        Object.entries(person.reasons).forEach(([reason,count])=>{
+
+          const reasonRow =
+            document.createElement("div");
+
+          reasonRow.className = "reason-row";
+
+          reasonRow.innerHTML =
+            `<span>${reasonLabels[reason]}</span>
+             <span>${count}</span>`;
+
+          breakdown.appendChild(reasonRow);
+
+        });
+
+        document.getElementById("reasonModal").style.display = "block";
+
+      };
+
       board.appendChild(row);
 
     });
 
 };
 
+window.closeReasonModal = function(){
+
+  document.getElementById("reasonModal").style.display = "none";
+
+};
+
 window.closeWelcomeModal = function(){
 
-  document.getElementById(
-    "welcomeModal"
-  ).style.display = "none";
+  document.getElementById("welcomeModal").style.display = "none";
 
 };
 
